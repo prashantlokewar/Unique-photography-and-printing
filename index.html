@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PrintPro Studio | Custom Printing Solutions</title>
+    <meta
+      name="description"
+      content="Custom printing for cups, t-shirts, bottles, caps, and more. High-quality, affordable printing for businesses, events, and personal branding."
+    />
+    <style>
+      :root {
+        --primary: #d62828;
+        --primary-dark: #a51717;
+        --secondary: #f4b942;
+        --dark: #111827;
+        --dark-soft: #1f2937;
+        --text: #374151;
+        --light: #f9fafb;
+        --muted: #6b7280;
+        --card: #ffffff;
+        --line: #e5e7eb;
+        --shadow: 0 20px 45px rgba(17, 24, 39, 0.12);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        color: var(--text);
+        background: var(--light);
+        line-height: 1.6;
+      }
+
+      img {
+        max-width: 100%;
+        display: block;
+      }
+
+      a {
+        text-decoration: none;
+      }
+
+      .container {
+        width: min(1120px, calc(100% - 32px));
+        margin: 0 auto;
+      }
+
+      header {
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(8px);
+        border-bottom: 1px solid var(--line);
+      }
+
+      .nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        min-height: 80px;
+      }
+
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-weight: 800;
+        color: var(--dark);
+        letter-spacing: 0.5px;
+      }
+
+      .logo-mark {
+        width: 40px;
+        height: 40px;
+        border-radius: 12px;
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        display: grid;
+        place-items: center;
+        color: white;
+        font-size: 1.2rem;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 28px;
+        align-items: center;
+      }
+
+      .nav-links a {
+        color: var(--dark-soft);
+        font-weight: 600;
+      }
+
+      .nav-links a:hover {
+        color: var(--primary);
+      }
+
+      .nav-btn,
+      .primary-btn,
+      .secondary-btn {
+        display: inline-block;
+        border: none;
+        border-radius: 999px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: 0.2s ease;
+      }
+
+      .nav-btn,
+      .primary-btn {
+        background: var(--primary);
+        color: white;
+        padding: 14px 24px;
+      }
+
+      .nav-btn:hover,
+      .primary-btn:hover {
+        background: var(--primary-dark);
+      }
+
+      .secondary-btn {
+        background: white;
+        color: var(--dark);
+        padding: 14px 24px;
+        border: 1px solid var(--line);
+      }
+
+      .secondary-btn:hover {
+        background: var(--light);
+      }
+
+      .hero {
+        padding: 80px 0 60px;
+        background: linear-gradient(135deg, rgba(246, 248, 250, 0.95), rgba(255, 255, 255, 0.7));
+      }
+
+      .hero-grid {
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        align-items: center;
+        gap: 42px;
+      }
+
+      .eyebrow {
+        display: inline-block;
+        background: rgba(214, 40, 40, 0.08);
+        color: var(--primary);
+        font-size: 0.8rem;
+        font-weight: 700;
+        padding: 8px 14px;
+        border-radius: 999px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      h1 {
+        font-size: clamp(2.5rem, 5vw, 4.2rem);
+        line-height: 1.05;
+        color: var(--dark);
+        margin: 20px 0 18px;
+      }
+
+      .lead {
+        font-size: 1.08rem;
+        max-width: 620px;
+        color: var(--muted);
+        margin-bottom: 30px;
+      }
+
+      .cta-group {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+        margin-bottom: 26px;
+      }
+
+      .hero-stats {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 26px;
+      }
+
+      .hero-stat strong {
+        display: block;
+        font-size: 1.6rem;
+        color: var(--dark);
+      }
+
+      .hero-stat span {
+        color: var(--muted);
+        font-size: 0.95rem;
+      }
+
+      .hero-visual {
+        position: relative;
+      }
+
+      .product-card {
+        background: var(--card);
+        border-radius: 26px;
+        box-shadow: var(--shadow);
+        overflow: hidden;
+        border: 1px solid rgba(17, 24, 39, 0.04);
+      }
+
+      .product-card img {
+        width: 100%;
+        height: 480px;
+        object-fit: cover;
+      }
+
+      .floating-badge {
+        position: absolute;
+        background: white;
+        border-radius: 18px;
+        box-shadow: var(--shadow);
+        padding: 18px 20px;
+        min-width: 180px;
+      }
+
+      .badge-top {
+        top: 30px;
+        right: -18px;
+      }
+
+      .badge-bottom {
+        left: -20px;
+        bottom: 32px;
+      }
+
+      .floating-badge small {
+        display: block;
+        color: var(--muted);
+        margin-bottom: 6px;
+      }
+
+      .floating-badge strong {
+        color: var(--dark);
+        font-size: 1.4rem;
+      }
+
+      section {
+        padding: 90px 0;
+      }
+
+      .section-heading {
+        text-align: center;
+        margin-bottom: 42px;
+      }
+
+      .section-heading h2 {
+        font-size: clamp(2rem, 4vw, 3rem);
+        color: var(--dark);
+        margin: 0 0 12px;
+      }
+
+      .section-heading p {
+        max-width: 700px;
+        margin: 0 auto;
+        color: var(--muted);
+        font-size: 1.05rem;
+      }
+
+      .cards {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 22px;
+      }
+
+      .service-card,
+      .feature-card,
+      .work-card,
+      .testimonial-card {
+        background: white;
+        border-radius: 24px;
+        box-shadow: 0 10px 30px rgba(17, 24, 39, 0.06);
+        border: 1px solid var(--line);
+      }
+
+      .service-card {
+        padding: 28px 22px;
+      }
+
+      .service-icon {
+        width: 64px;
+        height: 64px;
+        border-radius: 18px;
+        display: grid;
+        place-items: center;
+        background: rgba(214, 40, 40, 0.08);
+        font-size: 1.8rem;
+        margin-bottom: 18px;
+      }
+
+      .service-card h3 {
+        margin: 0 0 12px;
+        color: var(--dark);
+        font-size: 1.4rem;
+      }
+
+      .service-card p {
+        margin: 0;
+        color: var(--muted);
+      }
+
+      .about {
+        background: #111827;
+        color: white;
+      }
+
+      .about-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 38px;
+        align-items: center;
+      }
+
+      .about-box {
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 24px;
+        padding: 28px;
+      }
+
+      .about-box h3 {
+        margin-top: 0;
+        font-size: 2rem;
+      }
+
+      .about-list {
+        list-style: none;
+        padding: 0;
+        margin: 24px 0 0;
+        display: grid;
+        gap: 18px;
+      }
+
+      .about-list li {
+        display: flex;
+        gap: 12px;
+        align-items: flex-start;
+      }
+
+      .check {
+        width: 28px;
+        height: 28px;
+        background: rgba(244, 185, 66, 0.2);
+        color: var(--secondary);
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        font-weight: 700;
+        flex-shrink: 0;
+      }
+
+      .about-image {
+        border-radius: 26px;
+        overflow: hidden;
+        box-shadow: var(--shadow);
+      }
+
+      .about-image img {
+        height: 500px;
+        width: 100%;
+        object-fit: cover;
+      }
+
+      .features-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 22px;
+      }
+
+      .feature-card {
+        padding: 28px 22px;
+      }
+
+      .feature-card h3 {
+        margin: 0 0 12px;
+        color: var(--dark);
+      }
+
+      .feature-card p {
+        margin: 0;
+        color: var(--muted);
+      }
+
+      .process {
+        background: #fff7ea;
+      }
+
+      .work-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 24px;
+      }
+
+      .work-card {
+        overflow: hidden;
+      }
+
+      .work-card img {
+        height: 260px;
+        width: 100%;
+        object-fit: cover;
+      }
+
+      .work-info {
+        padding: 20px 20px 24px;
+      }
+
+      .work-info h3 {
+        margin: 0 0 8px;
+        font-size: 1.3rem;
+        color: var(--dark);
+      }
+
+      .work-info p {
+        margin: 0;
+        color: var(--muted);
+      }
+
+      .testimonials-wrap {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 22px;
+      }
+
+      .testimonial-card {
+        padding: 24px 22px;
+      }
+
+      .stars {
+        color: #f4b942;
+        letter-spacing: 2px;
+        font-size: 1.1rem;
+        margin-bottom: 12px;
+      }
+
+      .testimonial-card p {
+        color: var(--muted);
+        margin: 0 0 18px;
+      }
+
+      .person {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .avatar {
+        width: 48px;
+        height: 48px;
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        color: white;
+        font-weight: 700;
+      }
+
+      .person strong {
+        display: block;
+        color: var(--dark);
+      }
+
+      .person span {
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+
+      .cta-banner {
+        background: linear-gradient(135deg, var(--primary), #b71d1d);
+        color: white;
+        border-radius: 28px;
+        padding: 36px 42px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+      }
+
+      .cta-banner h3 {
+        margin: 0 0 6px;
+        font-size: clamp(1.7rem, 3vw, 2.4rem);
+      }
+
+      .cta-banner p {
+        margin: 0;
+        color: rgba(255, 255, 255, 0.8);
+      }
+
+      .contact-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+      }
+
+      .contact-box,
+      .form-box {
+        background: white;
+        border: 1px solid var(--line);
+        border-radius: 24px;
+        padding: 28px 24px;
+      }
+
+      .contact-box h3,
+      .form-box h3 {
+        margin-top: 0;
+        color: var(--dark);
+        font-size: 1.8rem;
+      }
+
+      .contact-list {
+        display: grid;
+        gap: 18px;
+        margin-top: 22px;
+      }
+
+      .contact-item {
+        display: flex;
+        gap: 14px;
+        align-items: flex-start;
+      }
+
+      .contact-icon {
+        width: 42px;
+        height: 42px;
+        border-radius: 12px;
+        background: rgba(214, 40, 40, 0.08);
+        display: grid;
+        place-items: center;
+        color: var(--primary);
+        font-weight: 700;
+      }
+
+      .contact-item strong {
+        display: block;
+        color: var(--dark);
+      }
+
+      .contact-item span,
+      .contact-item a {
+        color: var(--muted);
+      }
+
+      form {
+        display: grid;
+        gap: 16px;
+      }
+
+      input,
+      textarea {
+        width: 100%;
+        padding: 14px 16px;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        font: inherit;
+        background: #fff;
+      }
+
+      input:focus,
+      textarea:focus {
+        outline: 2px solid rgba(214, 40, 40, 0.15);
+        border-color: rgba(214, 40, 40, 0.4);
+      }
+
+      textarea {
+        min-height: 120px;
+        resize: vertical;
+      }
+
+      footer {
+        background: var(--dark);
+        color: white;
+        padding: 28px 0;
+      }
+
+      .footer-row {
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+
+      .footer-links {
+        display: flex;
+        gap: 18px;
+        flex-wrap: wrap;
+      }
+
+      .footer-links a {
+        color: rgba(255, 255, 255, 0.8);
+      }
+
+      @media (max-width: 980px) {
+        .hero-grid,
+        .about-grid,
+        .contact-grid,
+        .cards,
+        .features-grid,
+        .work-grid,
+        .testimonials-wrap {
+          grid-template-columns: 1fr 1fr;
+        }
+
+        .hero-grid,
+        .about-grid,
+        .contact-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 760px) {
+        .nav {
+          flex-wrap: wrap;
+          justify-content: center;
+          padding: 16px 0;
+          gap: 12px;
+        }
+
+        .nav-links {
+          width: 100%;
+          justify-content: center;
+          flex-wrap: wrap;
+        }
+
+        .cards,
+        .features-grid,
+        .work-grid,
+        .testimonials-wrap {
+          grid-template-columns: 1fr;
+        }
+
+        .cta-banner {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="container nav">
+        <div class="logo">
+          <div class="logo-mark">U</div>
+          <span>Unique photography and printing</span>
+        </div>
+        <nav class="nav-links" aria-label="Main navigation">
+          <a href="#services">Services</a>
+          <a href="#about">About</a>
+          <a href="#work">Work</a>
+          <a href="#reviews">Reviews</a>
+          <a href="#contact">Contact</a>
+        </nav>
+        <a class="nav-btn" href="#contact">Get Quote</a>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="container hero-grid">
+          <div>
+            <span class="eyebrow">Custom Printing & Photography Studio</span>
+            <h1>Premium printing and photography for your memories and brand.</h1>
+            <p class="lead">
+              We offer custom printing for cups, t-shirts, bottles, and caps along with high-quality photography services for personal, business, and event needs.
+            </p>
+            <div class="cta-group">
+              <a class="primary-btn" href="#contact">Request a Quote</a>
+              <a class="secondary-btn" href="#services">Explore Services</a>
+            </div>
+            <div class="hero-stats">
+              <div class="hero-stat">
+                <strong>500+</strong>
+                <span>Projects completed</span>
+              </div>
+              <div class="hero-stat">
+                <strong>4.9/5</strong>
+                <span>Client satisfaction</span>
+              </div>
+              <div class="hero-stat">
+                <strong>24h</strong>
+                <span>Quick support</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="hero-visual" aria-label="Printing and photography showcase">
+            <div class="product-card">
+              <img src="img/img1.png" />
+            </div>
+            <div class="floating-badge badge-top">
+              <small>Best for</small>
+              <strong>Brand & Events</strong>
+            </div>
+            <div class="floating-badge badge-bottom">
+              <small>Studio</small>
+              <strong>Photography</strong>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="services">
+        <div class="container">
+          <div class="section-heading">
+            <h2>Our Services</h2>
+            <p>Professional photography and customized printing solutions for personal, business, and event use.</p>
+          </div>
+
+          <div class="cards">
+            <article class="service-card">
+              <div class="service-icon">☕</div>
+              <h3>Cups</h3>
+              <p>Customized printed cups for businesses, gifting, and special events.</p>
+            </article>
+
+            <article class="service-card">
+              <div class="service-icon">👕</div>
+              <h3>T-Shirts</h3>
+              <p>Custom t-shirt printing for teams, events, brands, and personal use.</p>
+            </article>
+
+            <article class="service-card">
+              <div class="service-icon">🍼</div>
+              <h3>Bottles</h3>
+              <p>Elegant printed bottles for promotions, gifting, and brand visibility.</p>
+            </article>
+
+            <article class="service-card">
+              <div class="service-icon">🧢</div>
+              <h3>Caps</h3>
+              <p>Premium printed and embroidered caps for events, institutions, and teams.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="about" class="about">
+        <div class="container about-grid">
+          <div class="about-box">
+            <h3>About Unique photography and printing</h3>
+            <p style="color: rgba(255,255,255,0.8);">
+              We help businesses and individuals create memorable prints and beautiful visuals that stand out with quality, creativity, and reliable service.
+            </p>
+            <ul class="about-list">
+              <li>
+                <span class="check">✓</span>
+                <span>High-quality printing for cups, t-shirts, bottles, and caps.</span>
+              </li>
+              <li>
+                <span class="check">✓</span>
+                <span>Professional photography for events, portraits, and branding.</span>
+              </li>
+              <li>
+                <span class="check">✓</span>
+                <span>Affordable pricing and quick customer support for every order.</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="about-image">
+            <img src="img/img3.jpg" />
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="container">
+          <div class="section-heading">
+            <h2>Why Choose Us</h2>
+          </div>
+
+          <div class="features-grid">
+            <article class="feature-card">
+              <h3>Creative Design</h3>
+              <p>We create prints and visual content that match your brand, event, or personal style.</p>
+            </article>
+
+            <article class="feature-card">
+              <h3>Bulk Printing</h3>
+              <p>Perfect for events, offices, schools, gifting, and promotional campaigns.</p>
+            </article>
+
+            <article class="feature-card">
+              <h3>Fast Support</h3>
+              <p>We are quick to respond and help you with design, order details, and delivery support.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="work" class="process">
+        <div class="container">
+          <div class="section-heading">
+            <h2>Popular Products</h2>
+            <p>Explore some of the most requested items from our studio and printing service.</p>
+          </div>
+
+          <div class="work-grid">
+            <article class="work-card">
+              <img src="img/img tshirt.jpeg" />
+              <div class="work-info">
+                <h3>Custom T-Shirts</h3>
+                <p>Ideal for events, teams, promotions, and personal branding.</p>
+              </div>
+            </article>
+
+            <article class="work-card">
+              <img src="img/img bottle.jpeg" alt="Printed reusable bottle" />
+              <div class="work-info">
+                <h3>Promotional Bottles</h3>
+                <p>Useful corporate gifts and branded merchandise for everyday use.</p>
+              </div>
+            </article>
+
+            <article class="work-card">
+              <img src="img/img mug.jpeg" />
+              <div class="work-info">
+                <h3>Custom Mugs</h3>
+                <p>Great for uniforms, business promotions, and event giveaways.</p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="reviews">
+        <div class="container">
+          <div class="section-heading">
+            <h2>Customer Reviews</h2>
+            <p>We value every client and focus on quality service with great results.</p>
+          </div>
+
+          <div class="testimonials-wrap">
+            <article class="testimonial-card">
+              <div class="stars">★★★★★</div>
+              <p>“Amazing printing quality and quick response. The custom t-shirts looked excellent.”</p>
+              <div class="person">
+                <div class="avatar">A</div>
+                <div>
+                  <strong>Kiran</strong>
+                  <span>Client</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="testimonial-card">
+              <div class="stars">★★★★★</div>
+              <p>“The custom cups and bottles were exactly what we wanted for our event branding.”</p>
+              <div class="person">
+                <div class="avatar">P</div>
+                <div>
+                  <strong>Zahed</strong>
+                  <span>Event Planner</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="testimonial-card">
+              <div class="stars">★★★★★</div>
+              <p>“Very helpful service and the print quality was professional and clean.”</p>
+              <div class="person">
+                <div class="avatar">R</div>
+                <div>
+                  <strong>Prasant</strong>
+                  <span>Business Owner</span>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact">
+        <div class="container">
+          <div class="cta-banner">
+            <div>
+              <h3>Need custom printing or photography?</h3>
+              <p>Send us your requirement and we’ll help you with the best option for your budget and purpose.</p>
+            </div>
+            <a class="secondary-btn" href="https://wa.me/919922687488" target="_blank" rel="noopener">Chat on WhatsApp</a>
+          </div>
+
+          <div class="contact-grid" style="margin-top: 42px;">
+            <div class="contact-box">
+              <h3>Contact Information</h3>
+              <div class="contact-list">
+                <div class="contact-item">
+                  <div class="contact-icon">☎</div>
+                  <div>
+                    <strong>Phone</strong>
+                    <a href="tel:+919922687488">+91 99226 87488</a>
+                  </div>
+                </div>
+
+                <div class="contact-item">
+                  <div class="contact-icon">✉</div>
+                  <div>
+                    <strong>Email</strong>
+                    <a href="mailto:prashantlokewar143@gmail.com">prashantlokewar143@gmail.com</a>
+                  </div>
+                </div>
+
+                <div class="contact-item">
+                  <div class="contact-icon">⌂</div>
+                  <div>
+                    <strong>Address</strong>
+                    <span>Near SBI Bank, Kurunda</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-box">
+              <h3>Request a Quote</h3>
+              <form id="whatsappForm">
+                <input id="customerName" type="text" placeholder="Your Name" aria-label="Your Name" required />
+                <input id="customerEmail" type="email" placeholder="Email Address" aria-label="Email Address" required />
+                <input id="customerProduct" type="text" placeholder="Product Type (Cup, T-shirt, Bottle, Cap)" aria-label="Product Type" required />
+                <textarea id="customerMessage" placeholder="Tell us about your order requirements"></textarea>
+                <button class="primary-btn" type="submit">Send Request on WhatsApp</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="container footer-row">
+        <div>
+          <strong>Unique photography and printing</strong>
+          <div style="color: rgba(255,255,255,0.7);">Creative prints and memorable photography.</div>
+        </div>
+        <div class="footer-links">
+          <a href="#services">Services</a>
+          <a href="#about">About</a>
+          <a href="#work">Work</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      const whatsappNumber = "919922687488";
+      const whatsappForm = document.getElementById("whatsappForm");
+
+      whatsappForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        const name = document.getElementById("customerName").value.trim();
+        const email = document.getElementById("customerEmail").value.trim();
+        const product = document.getElementById("customerProduct").value.trim();
+        const message = document.getElementById("customerMessage").value.trim();
+
+        const text = [
+          "Hello, I would like to place a printing order.",
+          "",
+          `Name: ${name || "Not provided"}`,
+          `Email: ${email || "Not provided"}`,
+          `Product: ${product || "Not specified"}`,
+          `Order Details: ${message || "No additional details"}`
+        ].join("\n");
+
+        const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(text)}`;
+        window.open(whatsappUrl, "_blank");
+        whatsappForm.reset();
+      });
+    </script>
+  </body>
+</html>
